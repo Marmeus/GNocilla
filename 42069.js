@@ -11,13 +11,11 @@ server.on('connection',(socket) => {
                     socket.write("GNOCILLA");
                     break;
                 default:
-                    console.log("Default")
-                
+                    console.log("Default");
             }
             console.log(json);
         } catch (error) {
-            console.log("ERROR")
+            console.log("ERROR");
         }
-        
     })
 });
