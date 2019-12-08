@@ -1,18 +1,51 @@
 let net = require("net");
 let server = net.createServer();
 server.listen(42069);
-var fs = require('fs');
+const fs = require('fs');
 
 server.on('connection',(socket) => {
 
     
     var addr = socket.remoteAddress;
 
-    //hay que comprobar que no existe ya primero
-    fs.appendFile('allList.txt','\n' + addr,function(err){
-        if(err)throw err;
-            console.log('LA CAMARA DE LOS GNOCILLOS HA SIDO ABIERTA');
-    });
+
+    try {
+        //si el fichero con listas existe anyadimos/buscamos la direccion(asumimos que al menos tiene la primera linea csv)
+        if (fs.existsSync('./allList.csv')) {
+
+            //leemos los datos del fichero
+            fs.readFile('allList.csv', 'utf8', function (err, data) {
+                var content = data.split(/\r?\n/);
+                //console.log(content);
+              });
+            //comprobamos que la ip/usuario no esté ya en la lista
+            if(data.indexOf(addr) != -1){
+                //si no existe se incluye la correspondiente fila
+                fs.appendFile('allList.csv','\n'+'nombreUSER' + addr,function(err){
+                    if(err)throw err;
+                    console.log('IP incluida en la lista\n');
+                }); 
+
+            } 
+            
+        } else { //si no existe el fichero con todas las IP se crea 
+
+            //se crea el fichero con la primera linea de csv
+            fs.appendFile('allList.csv','usuario,ip',function(err){
+                if(err)throw err;
+                console.log('Fichero de direcciones creado\n');
+            });
+            //se incluye la correspondiente fila
+            fs.appendFile('allList.csv','\n' + 'nombreUSER,' + addr,function(err){
+                if(err)throw err;
+                console.log('IP asociada\n');
+            });
+
+        }
+    } catch(err) {
+        console.error(err)
+    }
+
     console.log('Conectado: ' + addr.address);
 
     //añadir a conectados
@@ -33,7 +66,7 @@ server.on('connection',(socket) => {
                     break;
 
                 case "busqueda":
-                    var s = json.cuerpo;
+                    var s = json.cuerpo; //implementar este objeto
 
                     //implementar inundacion con TTL
                     //enviar a todos los de la lista de MEMORIA excepto al que te lo ha enviado
@@ -41,10 +74,10 @@ server.on('connection',(socket) => {
                     
                     break;
                 case "dameloTO":
-                        
-                    let listiya = //listarFicheros.js;
+                    /*
+                    let listiya = //listarIP.js;
                     socket.write("" + listiya.toString());
-                    break;
+                    break;*/
 
                 default:
                     console.log("Default")
