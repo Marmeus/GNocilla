@@ -41,9 +41,9 @@ server.on('connection',(socket) => {
                     
                     break;
                 case "dameloTO":
-                        
+                        /*
                     let listiya = //listarFicheros.js;
-                    socket.write("" + listiya.toString());
+                    socket.write("" + listiya.toString());*/
                     break;
 
                 default:
