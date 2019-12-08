@@ -74,10 +74,10 @@ server.on('connection',(socket) => {
                     
                     break;
                 case "dameloTO":
-                    /*
-                    let listiya = //listarIP.js;
-                    socket.write("" + listiya.toString());
-                    break;*/
+                        /*
+                    let listiya = //listarFicheros.js;
+                    socket.write("" + listiya.toString());*/
+                    break;
 
                 default:
                     console.log("Default")
