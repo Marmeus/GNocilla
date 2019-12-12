@@ -7,14 +7,16 @@ exports.Ping = function(ip) {
             client.write(
                 JSON.stringify({ tipo: "REBANADADE" }),
                 () => {
-                    console.log("enviado");
                     start = new Date();
                 });
-            client.on('data', (data) => {
-                end = new Date();
-                client.end();
-                resolve(end - start);
-            });
+        });
+        client.on('data', (data) => {
+            end = new Date();
+            client.end();
+            resolve(end - start);
+        });
+        client.on('error', () => {
+            resolve(Infinity);
         });
     });
 };

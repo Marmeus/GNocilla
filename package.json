@@ -22,6 +22,8 @@
   "homepage": "https://github.com/Marmeus/GNocilla#readme",
   "dependencies": {
     "commander": "^4.0.1",
-    "inquirer": "^7.0.0"
+    "inquirer": "^7.0.0",
+    "ip": "^1.1.5",
+    "uniqid": "^5.2.0"
   }
 }

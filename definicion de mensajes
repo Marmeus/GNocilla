@@ -3,7 +3,20 @@ TIPO BUSQUEDA
 -buscando: "criterios de busqueda"
 -origen: IP del par que origina la busqueda
 -TTL: tiempo de vida
+-id
 
-TIPO NOMBRE DE ACHIVO
+ARCHIVOS_DISPONIBLES
 -tipo: archivos_disponibles
--ip: IP del par
+-archivos: []
+
+SOLICITUD DESCARGA
+SOLICITUD
+    tipo: "SOLICITUD_DESCARGA"
+    archivo:
+RESPUESTA
+    OK/ERROR
+    port
+
+
+
+FALTA SOLICITAR LA LISTA DE VECINOS
