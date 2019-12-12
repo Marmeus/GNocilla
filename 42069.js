@@ -9,13 +9,16 @@ server.on('connection',(socket) => {
     socket.on('end', () => {
         socket.end();
     });
+    socket.on('error', () => {
+        socket.end();
+    });
     socket.on('data', async (data) => {
         try {
             let json = JSON.parse(data.toString());
             switch(json.tipo) {
                 case "REBANADADE":
                     socket.write("GNOCILLA");
-                    if(!lista.estaEnLista(addr));
+                    if(lista.noEstaEnLista(addr))
                         lista.anyadirALista(addr);
                     break;
                 case "BUSCA":
@@ -45,7 +48,7 @@ server.on('connection',(socket) => {
             }
             //console.log(json);
         } catch (error) {
-            console.log("ERROR");
+            console.log("ERROR", error);
         }
     });
 });

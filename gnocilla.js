@@ -6,17 +6,6 @@ let { Descargar, Solicitar_Descarga } = require("./util/descargarArchivo");
 
 const folder = 'sandwichDeGNocilla/';
 
-//FUNCION PARA OBTERNET COSAS A PARTIR DE LA INTERFAZ
-async function obtenerTerminal(message){
-	return inquirer.prompt([ 
-		{
-			type: 'input',
-			name: 'respuesta',
-			message: message,
-		}
-	]);
-}
-
 async function busqueda(){
 	return inquirer.prompt([ 
 		{
@@ -41,7 +30,7 @@ async function promptOpciones() {
                 type: 'list',
                 name: 'menu',
                 message: 'Elige una opción',
-                choices: ['Buscar ficheros', 'Mostrar archivos disponibles','Mostrar archivos compartidos','Creditos','Salir'],
+                choices: ['Buscar ficheros', 'Mostrar archivos disponibles', 'Mostrar archivos compartidos', 'Mostar lista de pares','Invocar nuevas listas','Creditos','Salir'],
           } 
     ]);
 }
@@ -77,20 +66,31 @@ async function menu() {
             case 'Mostrar archivos disponibles':
                 let ar = lista.getArchivos();
                 for(let i = 0; i < ar.length; i++) {
-                    ar[i].value = `${ar[i].archivo.fileName}_${ar[i].archivo.size}_${ar[i].ip}`;
+                    ar[i].value = `${ar[i].archivo.fileName}_${ar[i].archivo.size} Bytes_${ar[i].ip}`;
                 }
-                let x =  (await archivos(ar)).archivo.split("_");
-                let filename = x[0];
-                let remote = x[2];
-                let port = await Solicitar_Descarga(filename,remote);
-                await Descargar(filename,remote,port);
-
+                ar.unshift({value:"Cancelar"});
+                let x =  (await archivos(ar)).archivo;
+                if(x != "Cancelar") {
+                    x = x.split("_");
+                    let filename = x[0];
+                    let remote = x[2];
+                    let port = await Solicitar_Descarga(filename,remote);
+                    await Descargar(filename,remote,port);
+                }
+                lista.limpiarArchivos();
                 break;
             case 'Mostrar archivos compartidos':
                 ListarArchivosCompartidos();
                 break;
-            case 'Help':
-                //INTRODUCIR
+            case 'Mostar lista de pares':
+                let l = lista.getLista();
+                for(let i = 0; i <= 10; i++) {
+                    if(l[i])
+                        console.log(`- ${l[i].ip} - PING: ${l[i].ping}`)
+                }
+                break;
+            case 'Invocar nuevas listas':
+                lista.invocarListas();
                 break;
             case 'Creditos':
                 credits();
@@ -104,12 +104,13 @@ async function menu() {
 async function main(){
 	try{
 		//SOLICITAMOS LA IP DE UN NODO GNOCILLA
-		let ipNodoPrimario = (await obtenerTerminal("Introduzca la IP de un nodo GNOCILLA: ")).respuesta;
+		let ipNodoPrimario = process.argv[3];
 		//SOLICITAMOS LA IP LOCAL DEL USUARIO
-        let ipLocal = (await obtenerTerminal("Introduzca su IP local: ")).respuesta;
+        let ipLocal = process.argv[2];
         //Colocar las ips
         lista.setMy_ip(ipLocal);
-        lista.anyadirALista(ipNodoPrimario);
+        if(ipNodoPrimario)
+            lista.anyadirALista(ipNodoPrimario);
 		//EJECUTAMOS
 		menu();
 	}catch(error){console.log(error);}

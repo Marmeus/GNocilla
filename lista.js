@@ -32,9 +32,10 @@ exports.anyadirAListaFondo = function (ip) {
         ping: Infinity
     });
 };
-exports.estaEnLista = function(ip_) {
+exports.noEstaEnLista = function(ip_) {
     let r = LISTA.findIndex(e => ip.isEqual(ip_, e.ip));
-    return r != -1;
+    r = r == -1 && !ip.isEqual(my_ip, ip_);
+    return r;
 };
 exports.copiarLista = function(otraLista) {
     LISTA = [];
@@ -111,6 +112,29 @@ exports.anyadirArchivo = function(archivo, ip) {
         ip
     });
 };
+exports.invocarListas = function() {
+    for(let i = 0; i < 10; i++) {
+        if(LISTA[i]) {
+            let c = net.Socket();
+            c.on('error', () => {
+                c.end();
+            });
+            c.on('data', (data) => {
+                let array = JSON.parse(data.toString());
+                c.end();
+                for(let j = 0; j < array.length; j++) {
+                    if(this.noEstaEnLista(array[j].ip))
+                    this.anyadirAListaFondo(array[j].ip);
+                }
+            });
+            c.connect(42069, LISTA[i].ip, () => {
+                c.write(JSON.stringify({
+                    tipo: "VECINOS"
+                }));
+            });
+        }
+    };
+};
 setInterval(() => {
     BUSQUEDAS_RECIENTES = [];
     LISTA.forEach(async (v) => {
@@ -119,4 +143,4 @@ setInterval(() => {
     LISTA.sort((a,b) => {
         return a.ping - b.ping;
     });
-}, 10000);
+}, 10 * 1000);
