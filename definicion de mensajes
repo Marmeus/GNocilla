@@ -1,0 +1,9 @@
+TIPO BUSQUEDA
+-tipo: BUSCA
+-buscando: "criterios de busqueda"
+-origen: IP del par que origina la busqueda
+-TTL: tiempo de vida
+
+TIPO NOMBRE DE ACHIVO
+-tipo: archivos_disponibles
+-ip: IP del par

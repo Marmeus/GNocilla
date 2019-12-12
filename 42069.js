@@ -23,3 +23,7 @@ server.on('connection',(socket) => {
         }
     })
 });
+
+function Busca(data, socket) {
+    
+}
