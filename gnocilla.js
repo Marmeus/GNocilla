@@ -30,7 +30,7 @@ async function promptOpciones() {
                 type: 'list',
                 name: 'menu',
                 message: 'Elige una opción',
-                choices: ['Buscar ficheros', 'Mostrar archivos disponibles', 'Mostrar archivos compartidos', 'Mostar lista de pares','Invocar nuevas listas','Creditos','Salir'],
+                choices: ['Buscar ficheros', 'Mostrar archivos disponibles', 'Mostrar archivos compartidos', 'Mostrar lista de pares','Invocar nuevas listas','Creditos','Salir'],
           } 
     ]);
 }
@@ -82,7 +82,7 @@ async function menu() {
             case 'Mostrar archivos compartidos':
                 ListarArchivosCompartidos();
                 break;
-            case 'Mostar lista de pares':
+            case 'Mostrar lista de pares':
                 let l = lista.getLista();
                 for(let i = 0; i <= 10; i++) {
                     if(l[i])

@@ -20,3 +20,39 @@ RESPUESTA
 
 
 FALTA SOLICITAR LA LISTA DE VECINOS
+
+MENSAJES
+
+SOLICITUD
+{ tipo : "REBANADADE" }
+RESPUESTA
+GNOCILLA
+
+SOLICITUD
+{ tipo: "BUSCA" }
+sin respuesta directa
+
+SOLICITUD
+{ tipo: "VECINOS" }
+RESPUESTA
+[{ ip, ping }]
+
+SOLICITUD
+{
+    tipo: "ARCHIVOS_DISPONIBLES",
+    archivos: [{
+        fileName, size
+    }]
+}
+sin respuesta: se almacenan los nombre de archivo y la ip en memoria
+
+SOLICITUD
+{
+    tipo:"SOLICITUD_DESCARGA",
+    archivo: "nombre_archivo"
+}
+RESPUESTA
+{
+    estado: "OK",
+    port: int->puerto donde se abre servidor para descarga
+}
