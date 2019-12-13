@@ -42,18 +42,18 @@ Trabajo de SSR para la creación de una red P2P desestructrada
 ## Prerequisitos
 ### Tener nodejs Y npm
 Instalar nodejs en Ubuntu.
-´´´
+```
 sudo apt-get update; sudo apt-get install nodejs npm -y
-´´´
+```
 ### Instalar dependencias
 Dentro de la carpeta de GNocilla ejecutamos:
-´´´
+```
 npm install
-´´´
+```
 ## Ejecución
-´´´
+```
 node gnocilla.js <IP Usuario> <IP de un nodo GNocilla>
-´´´
+```
 
 ### Comparitr un archivo (Primer par)
 1. Introducir el archivo a compartir en la carpeta “sandwichDeGnocilla”.
