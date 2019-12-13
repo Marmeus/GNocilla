@@ -1,26 +1,3 @@
-TIPO BUSQUEDA
--tipo: BUSCA
--buscando: "criterios de busqueda"
--origen: IP del par que origina la busqueda
--TTL: tiempo de vida
--id
-
-ARCHIVOS_DISPONIBLES
--tipo: archivos_disponibles
--archivos: []
-
-SOLICITUD DESCARGA
-SOLICITUD
-    tipo: "SOLICITUD_DESCARGA"
-    archivo:
-RESPUESTA
-    OK/ERROR
-    port
-
-
-
-FALTA SOLICITAR LA LISTA DE VECINOS
-
 MENSAJES
 
 SOLICITUD
@@ -29,8 +6,16 @@ RESPUESTA
 GNOCILLA
 
 SOLICITUD
-{ tipo: "BUSCA" }
-sin respuesta directa
+{ 
+    tipo: "BUSCA",
+    buscando: "criterio de busqueda",
+    origen: "ip del par que origina la busqueda",
+    ttl: int,
+    id: "string uniqid que identifica la busqueda"
+}
+sin respuesta directa, un par que recibe este mensaje lo reenvia a sus pares, a no ser que ya haya procesado esta
+busqueda recientemente (10 segundos), y si tiene algun archivo que cumpla los criterio, genera una solicitud ARCHIVOS_DISPONIBLES,
+que se explica mas abajo
 
 SOLICITUD
 { tipo: "VECINOS" }
