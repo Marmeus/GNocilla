@@ -20,8 +20,9 @@ Trabajo de SSR para la creación de una red P2P desestructrada
 1. Los pares escuchan al puerto 42069
 2. Un nuevo par, debe conocer la IP de algún otro par (P.e. a través de una web) que ya pertenezca a la red, le solicita a este la lista de pares, a través de ese puerto.
 3. El par que recibe la lista, envía un paquete REBANADADE (ping) a todos los pares de la lista.
-4. Los pares le responden GNOCILLA y el par mide el tiempo de respuesta, quedándose con los X mejores pares.
-Además, el protocolo “Rebanada de Gnocilla”, servirá para comprobar que los nodos que tiene en su lista siguen activos o no. (Hay una lista de “IPs históricas”, y otra de “IPs activas”.)
+	- El nuevo par lanza un mensaje “Rebanadade” de tipo ping a la IP del nodo de la red.
+	- Si el par está activo, responderá “GNOCILLA” y se medirá el tiempo de respuesta.
+4. Se solicitará la lista de pares de ese par y se repetirá el protocolo con cada uno de los pares obtenidos.
 
 ### Protocolo de búsqueda de archivos.
 1. Descubrir a los pares.
@@ -38,7 +39,31 @@ Además, el protocolo “Rebanada de Gnocilla”, servirá para comprobar que lo
 4. Cuando un par le solicite un archivo de esta lista, este par abrirá un puerto TCP aleatorio a la escucha y se lo dirá al par que ha solicitado el archivo.
 5. El solicitante iniciará una conexión TCP con el puerto indicado, y una vez se han conectado, el que tiene el fichero comienza a enviarlo.
 
-## Modo de ejecución
+## Prerequisitos
+### Tener nodejs Y npm
+Instalar nodejs en Ubuntu.
 ´´´
-node gnocilla.js <IP de un nodo GNocilla>
+sudo apt-get update; sudo apt-get install nodejs npm -y
 ´´´
+### Instalar dependencias
+Dentro de la carpeta de GNocilla ejecutamos:
+´´´
+npm install
+´´´
+## Ejecución
+´´´
+node gnocilla.js <IP Usuario> <IP de un nodo GNocilla>
+´´´
+
+### Comparitr un archivo (Primer par)
+1. Introducir el archivo a compartir en la carpeta “sandwichDeGnocilla”.
+2. Ejecutar el programa sin necesidad de indicar la IP de un nodo host de GNocilla
+
+### Descargar un archivo disponible
+1. Ejecutar el programa escribiendo “gnocilla.js <IP Usuario> <IP Nodo GNOCILLA>
+2. Seleccionamos la opción de “Buscar archivos”
+3. Introducimos una palabra de búsqueda. No introducir nada para buscar todoslos archivos disponibles.
+4. Seleccionamos uno de los archivos
+5. Se descarga el archivo en "sandwichDeGnocilla".
+
+
