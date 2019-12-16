@@ -66,4 +66,8 @@ node gnocilla.js <IP Usuario> <IP de un nodo GNocilla>
 4. Seleccionamos uno de los archivos
 5. Se descarga el archivo en "sandwichDeGnocilla".
 
-
+# Miembros del grupo
+* @grvmiguel
+* @shadowsofdust
+* @Marmeus
+* @carborfo
