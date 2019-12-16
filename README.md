@@ -67,7 +67,7 @@ node gnocilla.js <IP Usuario> <IP de un nodo GNocilla>
 5. Se descarga el archivo en "sandwichDeGnocilla".
 
 # Miembros del grupo
-* @grvmiguel
-* @shadowsofdust
-* @Marmeus
-* @carborfo
+* [grvmiguel](https://github.com/grvmiguel)
+* [shadowsofdust](https://github.com/shadowsofdust)
+* [Marmeus](https://github.com/Marmeus/)
+* [carborfo](https://github.com/carborfo)
