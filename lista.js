@@ -17,9 +17,6 @@ exports.setMy_ip = function (ip_) {
 exports.getLista = function() {
     return LISTA;
 };
-exports.setLista = function(lista_) {
-    LISTA = lista_;
-};
 exports.anyadirALista = function(ip) {
     LISTA.unshift({
         ip,
@@ -36,13 +33,6 @@ exports.noEstaEnLista = function(ip_) {
     let r = LISTA.findIndex(e => ip.isEqual(ip_, e.ip));
     r = r == -1 && !ip.isEqual(my_ip, ip_);
     return r;
-};
-exports.copiarLista = function(otraLista) {
-    LISTA = [];
-    otraLista.forEach(e => {
-        if(!ip.isEqual(my_ip, e.ip))
-            LISTA.push(e);
-    });
 };
 exports.iniciarBusqueda = function(buscando) {
     return new Promise((resolve, reject) => {
