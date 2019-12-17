@@ -35,7 +35,7 @@ async function promptOpciones() {
     ]);
 }
 async function credits(){
-	console.log("\nDesarrollado por:\n* Jesús Ródenas\n* Miguel Garcia\n* Daniel arraez\n* Carlos Borrell\n");
+	console.log("\nDesarrollado por:\n* Jesús Ródenas\n* Miguel Garcia\n* Daniel Arraez\n* Carlos Borrell\n");
 }
 //MUESTRA LOS ARCHIVOS DISPONIBLES PARA COMPARTIR
 async function ListarArchivosCompartidos(){
@@ -86,7 +86,7 @@ async function menu() {
                 let l = lista.getLista();
                 for(let i = 0; i <= 10; i++) {
                     if(l[i])
-                        console.log(`- ${l[i].ip} - PING: ${l[i].ping}`)
+                        console.log(`- ${l[i].ip} - PING: ${l[i].ping}`);
                 }
                 break;
             case 'Invocar nuevas listas':
